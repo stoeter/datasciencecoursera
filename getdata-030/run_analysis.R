@@ -32,7 +32,6 @@ check_features <- summarize(by_V2, n = n()) %>% arrange(desc(n))
 check_features
 
 #merge labels with activities and generate test data frame
-#labels_test <- tbl_df(merge(labels_test, activity_labels, by.x = "V1", by.y = "V1"))
 labels_test <- tbl_df(inner_join(labels_test, activity_labels, by = c("V1" = "V1")))
 testDF <- tbl_df(data.frame(subject = subjects_test$V1, label = labels_test$V2, measurement = test))
 names(testDF) <- c("subject", "activity", as.character(features$V2))
@@ -43,7 +42,6 @@ labels_training <- tbl_df(read.table("./raw_data/UCI HAR Dataset/train/y_train.t
 subjects_training <- tbl_df(read.table("./raw_data/UCI HAR Dataset/train/subject_train.txt"))
 
 #merge labels with activities and generate training data frame
-#labels_training <- tbl_df(merge(labels_training, activity_labels, by.x = "V1", by.y = "V1"))
 labels_training <- tbl_df(inner_join(labels_training, activity_labels, by = c("V1" = "V1")))
 trainingDF <- tbl_df(data.frame(subject = subjects_training$V1, label = labels_training$V2, measurement = training))
 names(trainingDF) <- c("subject", "activity", as.character(features$V2))
